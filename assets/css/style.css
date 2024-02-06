@@ -27,6 +27,61 @@ h1 {
     font-family: sans-serif;
 }
 
+h2 {
+  color: #fff;
+}
+
+.f1 {
+    background-color: steelblue;
+    color: White;
+    max-width: 100%;
+    margin-right: 1%;
+
+}
+
+.f2 {
+    background-color: steelblue;
+    color: White;
+    max-width: 100%;
+    margin-right: 1%;
+
+}
+
+.f3 {
+    background-color: steelblue;
+    color: White;
+    max-width: 100%;
+    margin-right: 1%;
+
+}
+
+.f4 {
+    background-color: steelblue;
+    color: White;
+    max-width: 100%;
+    margin-right: 1%;
+
+}
+
+.f5 {
+    background-color: steelblue;
+    color: White;
+    max-width: 100%;
+    margin-right: 1%;
+
+}
+
+
+/* .weather-input .separator::before { 
+    content: "or";
+    color: #6c757d;
+    font-size: 1.18rem;
+    padding: 0 15px;
+    margin-top: -4px;
+    /* background: #e3f2fd; 
+}*/
+/* 
+
 .weather-input { 
     width: 550px;
 }
@@ -150,52 +205,4 @@ h1 {
   }
 }
 
-.f1 {
-    background-color: steelblue;
-    color: White;
-    max-width: 100%;
-    margin-right: 1%;
-
-}
-
-.f2 {
-    background-color: steelblue;
-    color: White;
-    max-width: 100%;
-    margin-right: 1%;
-
-}
-
-.f3 {
-    background-color: steelblue;
-    color: White;
-    max-width: 100%;
-    margin-right: 1%;
-
-}
-
-.f4 {
-    background-color: steelblue;
-    color: White;
-    max-width: 100%;
-    margin-right: 1%;
-
-}
-
-.f5 {
-    background-color: steelblue;
-    color: White;
-    max-width: 100%;
-    margin-right: 1%;
-
-}
-
-
-/* .weather-input .separator::before { 
-    content: "or";
-    color: #6c757d;
-    font-size: 1.18rem;
-    padding: 0 15px;
-    margin-top: -4px;
-    /* background: #e3f2fd; 
-}*/
+ */
