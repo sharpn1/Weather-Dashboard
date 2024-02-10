@@ -1,83 +1,73 @@
 // Page is ready to run after html is loaded
 $(document).ready(function(){
 
-  // City Input and Search History search-input           
+  // Search History search-input City Input             
   var searchedCities = [];
   
-  // On click function for stored cities
+  // Stored cities click function
   $("#search-button").on("click", getSearchInput);
   $(document).on("click", ".selected", storedCities);
   
   // Call searchHistory function when the dashboard page loads
   searchHistory();
   
-  // Display recently searched cities stored in search history
+  // Stored cities in search history
   function storedCities() {
-      // Store cities' name value
+     
       var city = $(this)[0].innerHTML;
-      // Transfer city name when user selects a stored city in the search history
-      getWeather(city);
+       getWeather(city);
       }
   
-  // Listen to the search button click and create function to get user input/city
+  // function to get user input/city
   function getSearchInput(event) {
       event.preventDefault();
       $("#previousSearches").empty();
-      // Declare variable for city input
       var city = $(".form-input").val(); 
-      // Create array of searched cities
       searchedCities.push(city);
-      // Create string from searched cities in the searched cities array
       localStorage.setItem("cities", JSON.stringify(searchedCities));
-      // Display new searched cities
+      // New searched cities displayed
       var searchHistoryList = $("<div>").text(city).addClass("selected");
       $("#searchHistory").append(searchHistoryList);
-      // Clear out search bar when user searches for city
       $("#search-Input").val("");
-      // Event for ajax calls to to getWeather api function
       getWeather(city);
   }
   
-  //Create function to display cities search History stored in localStorage
+  //function to display cities stored in localStorage
   function searchHistory() {
-      //Convert string into object using JSON.parse
       searchedCities = JSON.parse(localStorage.getItem("cities"));
-      // Use if else statements and for loop to initialise searchedCities based on search history
       if (searchedCities === null) {
       searchedCities = [];
        }
-      //Loop through searched citiies 
       for (var i = 0; i < searchedCities.length; i++) {
           var displaySearchedCities = searchedCities[i];
-          // Display searched history and store in local storage
           var searchHistoryList = $("<div>").text(displaySearchedCities).addClass("selected"); 
           $("#searchHistory").append(searchHistoryList);
       }
   }
+   
+  //WEATHER API //              
   
-  // GET WEATHER API CALL //              
-  
-  // Created apiKey to call the OpenWeatherMap API
+  //API key for openweathermap
   var apiKey = "1ff0f6823d723403dabe8415bdcb12e3";
   
-  // Current weather function
+  // Weather function
   function getWeather (city) {
 
-  // Build the URL needed to query the database of the OpenWeatherMap API
+  // URL needed to query the database 
   var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey;
   
-  // Run AJAX GET call to request the OpenWeatherMap API
+  // Run AJAX GET call 
        $.ajax({
           url: queryURL,
           method: "GET",
           dataType: "jsonp",
-  // Store all of the retrieved data inside of a response object 
+  // Store recieved data inside of a response object 
           success: function(response){
-  // Log the queryURL and resulting object
+  // console.log the queryURL 
               console.log(queryURL);
               console.log(response);
   
-                  // Retrieve dates
+                  // Recieve dates
                   function date_format(dt_string){
                       var date = new Date(dt_string.dt*1000);
                       return date.toDateString();
@@ -89,20 +79,20 @@ $(document).ready(function(){
                       return temp;
                   }
           
- // Empties the divs to get rid of previous searches
+ //Get rid of previous searches
    $("#previousSearches").empty();
   
    var holder= response.list[0];
- // cURRENT WEATHER //              
+ // CURRENT WEATHER //              
   
- // Transfer Current Weather content to HTML and retrieve and display icon from weather API
+ //HTML for the main weather card
                           $(".currentCity").html("<h3>" + response.city.name + " " + date_format(holder) + "</h3>").append(
-                              $('<img src=" '+ "http://openweathermap.org/img/wn/"+response.list[0].weather[0].icon+"@2x.png" +' "/>')); 
+                              $('<img src=" '+ "http://openweathermap.org/img/wn/"+response.list[0].weather[0].icon+"@4x.png" +' "/>')); 
                           $(".humidity").text("Humidity: " + holder.main.humidity + " %");
                           $(".windSpeed").text("Wind Speed: " + holder.wind.speed + " mph");
                           $(".temperature").text(temp_trans(holder));
                            
-  //  GET 5 DAY FORECAST and icon//                                    
+  //HTML for the 5 day forcast card                                    
                       for(i=1; i<=5; i++){
                       holder= response.list[(i*8)-1];
                     
@@ -110,40 +100,22 @@ $(document).ready(function(){
                       $("#"+ i + "dayIcon").empty().append($('<img src=" '+ "http://openweathermap.org/img/wn/"+holder.weather[0].icon+".png" +' "/>'));
                       $("#"+ i + "dayHumidity").text("Humidity: " + holder.main.humidity + " %");
                       $("#"+ i + "dayTemperature").text(temp_trans(holder));
-  
+                      $("#"+ i + "dayWindSpeed").text("Wind Speed: " + holder.wind.speed + " mph");
                       }
                 }
           });           
   } 
   
-  // Using lat and long with get uvIndex and display on Currentweather DOM
+  //Adding weather cards to the DOM
   function getUVindex(lat,long) {  
-               
- //Build the URL we need to get the UVI information
       var queryURL = "https://api.openweathermap.org/data/2.5/onecall?" + "&lat=" + lat + "&lon=" + long + "&appid=" + apiKey;
   
- // Here we run our AJAX call to the OpenWeatherMap API
+ //AJAX call 
       $.ajax({
           url: queryURL,
           method: "GET"
       })
-          .then(function(responseUVI) {
-              console.log(responseUVI.current.uvi)
-              var uvIndex = responseUVI.current.uvi;
-              //Print UVIndex
-              $("#uvIndex").text("UV Index: " + uvIndex);
-              
-              if (uvIndex <= 2.99) {                  
-                  uvIndex = $("#uvIndex").css({"background-color": "olivedrab", "display": "block", "border-radius": "12px", "padding": "1.5%", "max-width": "20%"});
-              } else if (uvIndex >= 3 & uvIndex <= 5.99) {
-                  uvIndex = $("#uvIndex").css({"background-color": "gold", "display": "block", "border-radius": "12px", "padding": "1.5%", "max-width": "20%"});
-              } else if (uvIndex >= 6 & uvIndex <= 7.99) {
-                  uvIndex = $("#uvIndex").css({"background-color": "darkorange", "display": "block", "border-radius": "12px", "padding": "1.5%", "max-width": "20%"});
-              } else if (uvIndex >= 8) {
-                  uvIndex = $("#uvIndex").css({"background-color": "firebrick", "display": "block", "border-radius": "12px", "padding": "1.5%", "max-width": "20%"});
-              };
-  
-          });
+         
       } 
   getWeather("London");
   }); 
