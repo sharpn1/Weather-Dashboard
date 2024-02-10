@@ -27,7 +27,7 @@ Create a weather dashboard with form inputs:
  
 ## Usage
 
-After installing the project, open your web browser and navigate to (https://sharpn1.github.io/APIs-Weather-Dashboard/). Here, you can enter the name of a city in the search bar to view its current and future weather conditions. The city name along with its weather data will be stored in the search history.
+After installing the project, open your web browser and navigate to (https://sharpn1.github.io/Weather-Dashboard/). Here, you can enter the name of a city in the search bar to view its current and future weather conditions. The city name along with its weather data will be stored in the search history.
 
 ## Features
 
@@ -36,6 +36,9 @@ After installing the project, open your web browser and navigate to (https://sha
 - Search History: Each city entered by the user is stored in the search history. Clicking on a city in the search history brings up its current and future weather conditions.
 
 ## Screenshot
+![image](https://github.com/sharpn1/Weather-Dashboard/assets/152098466/a33221ac-b027-43e8-92e8-ccac9c522dd3)
+![image](https://github.com/sharpn1/Weather-Dashboard/assets/152098466/555f85c5-14fb-4d6d-b731-b6d89b1a6449)
+
 
 
 ## Built With
@@ -49,7 +52,7 @@ After installing the project, open your web browser and navigate to (https://sha
 ## Authors
 
 - **Shahreen Ahmed** - *SA* -
-- https://github.com/sharpn1/APIs-Weather-Dashboard
--(https://sharpn1.github.io/APIs-Weather-Dashboard/)
+- https://github.com/sharpn1/Weather-Dashboard
+-https://sharpn1.github.io/Weather-Dashboard/
 
 
